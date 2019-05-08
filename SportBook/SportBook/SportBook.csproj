@@ -133,11 +133,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Event\Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Team\Controllers\HomeController.cs" />
+    <Compile Include="User\Controllers\HomeController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -150,6 +152,13 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Event\Views\_ViewStart.cshtml" />
+    <Content Include="Event\Views\Home\About.cshtml" />
+    <Content Include="Event\Views\Home\Contact.cshtml" />
+    <Content Include="Event\Views\Home\Index.cshtml" />
+    <Content Include="Event\Views\Shared\_Layout.cshtml" />
+    <Content Include="Event\Views\Shared\Error.cshtml" />
+    <Content Include="Event\Views\Web.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -168,13 +177,20 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="User\Views\Home\About.cshtml" />
+    <Content Include="User\Views\Home\Contact.cshtml" />
+    <Content Include="User\Views\Home\Index.cshtml" />
+    <Content Include="User\Views\Shared\Error.cshtml" />
+    <Content Include="User\Views\Shared\_Layout.cshtml" />
+    <Content Include="User\Views\Web.config" />
+    <Content Include="User\Views\_ViewStart.cshtml" />
+    <Content Include="Team\Views\_ViewStart.cshtml" />
+    <Content Include="Team\Views\Home\About.cshtml" />
+    <Content Include="Team\Views\Home\Contact.cshtml" />
+    <Content Include="Team\Views\Home\Index.cshtml" />
+    <Content Include="Team\Views\Shared\_Layout.cshtml" />
+    <Content Include="Team\Views\Shared\Error.cshtml" />
+    <Content Include="Team\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
