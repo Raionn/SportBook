@@ -133,6 +133,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Event\Controllers\EventController.cs" />
+    <Compile Include="Areas\Event\EventAreaRegistration.cs" />
+    <Compile Include="Areas\Team\Controllers\PlayerController.cs" />
+    <Compile Include="Areas\Team\Controllers\TeamController.cs" />
+    <Compile Include="Areas\Team\TeamAreaRegistration.cs" />
+    <Compile Include="Areas\User\Controllers\PlayerListController.cs" />
+    <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -150,6 +157,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Team\Views\web.config" />
+    <Content Include="Areas\Event\Views\web.config" />
+    <Content Include="Areas\User\Views\web.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -178,6 +188,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Event\Models\" />
+    <Folder Include="Areas\Event\Views\Event\" />
+    <Folder Include="Areas\Event\Views\Shared\" />
+    <Folder Include="Areas\Team\Models\" />
+    <Folder Include="Areas\Team\Views\Player\" />
+    <Folder Include="Areas\Team\Views\Shared\" />
+    <Folder Include="Areas\Team\Views\Team\" />
+    <Folder Include="Areas\User\Models\" />
+    <Folder Include="Areas\User\Views\PlayerList\" />
+    <Folder Include="Areas\User\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
