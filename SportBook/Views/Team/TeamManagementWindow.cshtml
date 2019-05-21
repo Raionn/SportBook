@@ -7,6 +7,19 @@
 
 <li class="list-group-item list-group-item-action">
     @ViewData["team"]
-    <a asp-action="TeamManagementWindow" asp-route-id=@ViewData["team"]>Invite</a> |
+    
     <a asp-action="removePlayerFromTeam" asp-route-id=@ViewData["team"]>Leave</a>
 </li>
+<br />
+
+<h5>All players</h5>
+<ul class="list-group">
+
+    @foreach (string name in ViewData["players"] as IList<string>)
+    {
+        <li class="list-group-item">
+            @name
+            <a asp-action="sendInvitationToSelectedPlayer" asp-route-id=@ViewData["team"]>Invite</a>
+        </li>
+    }
+</ul>

@@ -38,12 +38,34 @@ namespace SportBook.Controllers
         public IActionResult TeamManagementWindow(string id)
         {
             ViewData["team"] = id;
+            ViewData["players"] = getPlayerList();
             return View();
         }
 
+        public List<string> getPlayerList()
+        {
+            return new List<string>
+                {
+                    "žaidėjas1",
+                    "žaidėjas2",
+                    "žaidėjas3",
+                    "žaidėjas4",
+                    "žaidėjas5",
+                    "žaidėjas6",
+                };
+        }
+
+        public ActionResult sendInvitationToSelectedPlayer(string id)
+        {
+            //TODO: saveInvitation()
+
+            return RedirectToAction("TeamManagementWindow" , "Team", new { id });
+        }
+
+
         public ActionResult removePlayerFromTeam(string id)
         {
-            //TODO: call entity removePlayerFromTeam(id)
+            //TODO: removePlayerFromTeam(id)
 
             return RedirectToAction("MyTeamsWindow");
         }
