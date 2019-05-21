@@ -12,5 +12,20 @@ namespace SportBook.Controllers
         {
             return View();
         }
+
+        public IActionResult MyTeamsWindow()
+        {
+            return View();
+        }
+
+        public IActionResult ProfileWindow()
+        {
+            return View();
+        }
+
+        public IActionResult TeamManagementWindow()
+        {
+            return View();
+        }
     }
 }

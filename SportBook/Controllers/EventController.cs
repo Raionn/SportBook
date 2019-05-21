@@ -12,5 +12,15 @@ namespace SportBook.Controllers
         {
             return View();
         }
+
+        public IActionResult EventForm()
+        {
+            return View();
+        }
+
+        public IActionResult EventWindow()
+        {
+            return View();
+        }
     }
 }
