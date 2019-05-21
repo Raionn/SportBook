@@ -8,21 +8,32 @@ namespace SportBook.Controllers
 {
     public class PlayerListController : Controller
     {
-        public IActionResult PlayerListWindow()
+        public IActionResult PlayerListWindow(string filter)
         {
-            if(ViewData["filter"] != null)
+            ViewData["filter"] = filter;
+
+            if (ViewData["filter"] != null)
             {
-                IList<string> players = new List<string>
+                
+                List<string> players = new List<string>
+                {
+                    "alio",
+                    "gerai"
+                };
+
+                var resultList = players.FindAll(delegate (string s) { return s.Contains(filter); });
+
+                ViewData["players"] = resultList;
+            }
+            else
+            {
+                List<string> players = new List<string>
                 {
                     "alio",
                     "gerai"
                 };
 
                 ViewData["players"] = players;
-            }
-            else
-            {
-                ViewData["players"] = new List<string>();
             }
             
 
