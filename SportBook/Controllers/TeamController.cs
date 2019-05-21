@@ -41,6 +41,13 @@ namespace SportBook.Controllers
             return View();
         }
 
+        public ActionResult removePlayerFromTeam(string id)
+        {
+            //TODO: call entity removePlayerFromTeam(id)
+
+            return RedirectToAction("MyTeamsWindow");
+        }
+
         public List<string> getTeamsAssociatedWithPlayer()
         {
             //TODO: query database
