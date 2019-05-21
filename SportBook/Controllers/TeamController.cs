@@ -8,13 +8,110 @@ namespace SportBook.Controllers
 {
     public class TeamController : Controller
     {
-        public IActionResult TeamList()
+        public IActionResult MyTeamsWindow()
         {
             ViewData["teams"] = getTeamsAssociatedWithPlayer();
             return View();
         }
 
+        public IActionResult TeamList(string filter)
+        {
+            ViewData["filter"] = filter;
+
+            if (ViewData["filter"] != null)
+            {
+                ViewData["teams"] = getFilteredTeamList(filter);
+            }
+            else
+            {
+                ViewData["teams"] = getTeamList();
+            }
+
+            return View();
+        }
+
+        public IActionResult ProfileWindow(string id)
+        {
+            ViewData["teams"] = getTeamsThatInvited();
+
+            return View();
+        }
+
+        public ActionResult acceptInvitation(string id)
+        {
+            //TODO: addUserToMembers()
+
+            return RedirectToAction("ProfileWindow", "Team", new { id });
+        }
+
+        public ActionResult rejectInvitation(string id)
+        {
+            //TODO: removeInvitation()
+            //TODO: sendRejectionMessage()
+
+            return RedirectToAction("ProfileWindow", "Team", new { id });
+        }
+
+        public List<string> getTeamsThatInvited()
+        {
+            //TODO: query database
+
+            return new List<string>
+                {
+                    "kvieciantikomanda1",
+                    "kvieciantikomanda2",
+                    "kvieciantikomanda3",
+                };
+        }
+
+        public IActionResult TeamManagementWindow(string id)
+        {
+            ViewData["team"] = id;
+            ViewData["players"] = getPlayerList();
+            return View();
+        }
+
+        public List<string> getPlayerList()
+        {
+            return new List<string>
+                {
+                    "žaidėjas1",
+                    "žaidėjas2",
+                    "žaidėjas3",
+                    "žaidėjas4",
+                    "žaidėjas5",
+                    "žaidėjas6",
+                };
+        }
+
+        public ActionResult sendInvitationToSelectedPlayer(string id)
+        {
+            //TODO: saveInvitation()
+
+            return RedirectToAction("TeamManagementWindow" , "Team", new { id });
+        }
+
+
+        public ActionResult removePlayerFromTeam(string id)
+        {
+            //TODO: removePlayerFromTeam(id)
+
+            return RedirectToAction("MyTeamsWindow");
+        }
+
         public List<string> getTeamsAssociatedWithPlayer()
+        {
+            //TODO: query database
+
+            return new List<string>
+                {
+                    "manokomanda1",
+                    "manokomanda2",
+                    "manokomanda3"
+                };
+        }
+
+        public List<string> getTeamList()
         {
             //TODO: query database
 
@@ -26,19 +123,23 @@ namespace SportBook.Controllers
                 };
         }
 
-        public IActionResult MyTeamsWindow()
+        public List<string> getFilteredTeamList(string filter)
         {
-            return View();
-        }
+            //TODO: query database
 
-        public IActionResult ProfileWindow()
-        {
-            return View();
-        }
+            List<string> players = new List<string>
+                {
+                    "filtruotaKomanda1",
+                    "filtruotaKomanda2",
+                    "filtruotaKomanda3",
+                    "filtruotaKomanda4",
+                    "filtruotaKomanda5",
+                    "filtruotaKomanda6",
+                };
 
-        public IActionResult TeamManagementWindow()
-        {
-            return View();
+            var resultList = players.FindAll(delegate (string s) { return s.Contains(filter); });
+
+            return resultList;
         }
     }
 }

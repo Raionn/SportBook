@@ -15,15 +15,21 @@
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-controller="Team" asp-action="ProfileWindow">Profile</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Team" asp-action="TeamManagementWindow">Manage Team</a>
-                </li>
-
             </ul>
         </div>
     </div>
 </nav>
 <h1>TeamList</h1>
+
+<form asp-action="TeamList" method="get">
+    <div class="form-actions no-color">
+        <p>
+            <input type="text" name="filter" value="@ViewData["filter"]" />
+            <input type="submit" value="filter" class="btn btn-default" /> |
+            <a asp-action="TeamList">Back to Full List</a>
+        </p>
+    </div>
+</form>
 <ul class="list-group">
 
     @foreach (string name in ViewData["teams"] as IList<string>)

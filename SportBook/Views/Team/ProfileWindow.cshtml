@@ -5,3 +5,15 @@
 
 <h1>ProfileWindow</h1>
 
+<ul class="list-group">
+
+    @foreach (string name in ViewData["teams"] as IList<string>)
+    {
+    <li class="list-group-item">
+        @name
+        <a asp-action="acceptInvitation" asp-route-id=@ViewData["team"]>Accept</a>
+        <a asp-action="rejectInvitation" asp-route-id=@ViewData["team"]>Reject</a>
+    </li>
+    }
+
+</ul>
