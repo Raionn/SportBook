@@ -11,4 +11,14 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Content\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\img\desktop.ini" />
+    <None Include="wwwroot\img\header.jpg" />
+    <None Include="wwwroot\img\header.png" />
+  </ItemGroup>
+
 </Project>
