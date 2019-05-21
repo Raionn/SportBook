@@ -5,18 +5,23 @@
 
 <h2>Event list</h2>
 
-@*<form asp-action="EventList" method="get">
-    <div class="form-actions no-color">
-        <p>
-            <a asp-action="EventList">Back to Full List</a>
-        </p>
-    </div>
-</form>*@
+@*<button type="button" class="btn btn-dark">Create an event</button>*@
+<a class="navbar-brand" asp-area="" asp-controller="Event" asp-action="EventForm">Create an event</a>
+<p />
 <ul class="list-group">
 
     @foreach (string name in ViewData["events"] as IList<string>)
     {
-        <li class="list-group-item">@name</li>
+        <li class="list-group-item">
+            @name
+
+            @*<a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>*@
+
+            <a asp-action="Details" asp-route-id="asd">Details</a> |
+            <a asp-action="Edit" asp-route-id="asd">Edit</a> |
+        </li>
     }
 
 </ul>
