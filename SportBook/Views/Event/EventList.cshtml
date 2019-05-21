@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "EventList";
+}
+
+<h2>Event list</h2>
+
+@*<form asp-action="EventList" method="get">
+    <div class="form-actions no-color">
+        <p>
+            <a asp-action="EventList">Back to Full List</a>
+        </p>
+    </div>
+</form>*@
+<ul class="list-group">
+
+    @foreach (string name in ViewData["events"] as IList<string>)
+    {
+        <li class="list-group-item">@name</li>
+    }
+
+</ul>

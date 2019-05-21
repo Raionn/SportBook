@@ -8,8 +8,18 @@ namespace SportBook.Controllers
 {
     public class EventController : Controller
     {
-        public IActionResult EventsList()
+        public IActionResult EventList()
         {
+            IList<string> events = new List<string>
+            {
+                "event_1",
+                "event_2",
+                "event_3",
+                "( ͡° ͜ʖ ͡°)"
+            };
+
+            ViewData["events"] = events;
+
             return View();
         }
 
