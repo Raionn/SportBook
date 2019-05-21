@@ -31,8 +31,8 @@ namespace SportBook.Controllers
 
             List<string> players = new List<string>
                 {
-                    "alio",
-                    "gerai"
+                    "žaidėjas1",
+                    "žaidėjas2"
                 };
 
             var resultList = players.FindAll(delegate (string s) { return s.Contains(filter); });
