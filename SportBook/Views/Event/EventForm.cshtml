@@ -15,7 +15,17 @@
 <h1>EventForm</h1>
 
 <body>
-    <form asp-action="submitChanges" asp-route-id=@ViewData["id"]>
+    @{string action;
+        if (ViewData["id"] == null)
+        {
+            action = "SubmitData";
+        }
+        else
+        {
+            action = "submitChanges";
+        }
+        }
+    <form asp-action=@action asp-route-id=@ViewData["id"]>
         <fieldset>
             <legend>Event details:</legend>
                 <input type="text" name="name" value=@ViewData["id"]>

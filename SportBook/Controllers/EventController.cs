@@ -11,6 +11,14 @@ namespace SportBook.Controllers
 {
     public class EventController : Controller
     {
+        List<string> messages = new List<string>
+            {
+                "alio",
+                "kaip sekas?",
+                "gerai",
+                "( ͡° ͜ʖ ͡°)"
+            };
+
         public IActionResult EventList()
         {
             //TODO: getEventList()
@@ -44,19 +52,30 @@ namespace SportBook.Controllers
         public IActionResult EventWindow(string id)
         {
             ViewData["id"] = id;
+
+
+            //TODO: selectAll() messages
+            ViewData["messages"] = messages;
+
             return View();
         }
 
-        public ActionResult submitChanges(string id)
+        public ActionResult submitMessage()
         {
-            //TODO: validate
+            string message = String.Format("{0}", Request.Form["message"]);
+
+            //TODO: save()
+
+
+            return RedirectToAction("EventWindow");
+        }
+
+        public ActionResult SubmitData()
+        {
 
             string name = String.Format("{0}", Request.Form["name"]);
             var game = String.Format("{0}", Request.Form["selectedGame"]);
-            //if (Request.Form["datetimepicker"].Equals(null))
-            //{
-            //    return RedirectToAction("EventForm", "Event", new { id = "error"});
-            //}
+
             try
             {
                 var date = Convert.ToDateTime(String.Format(Request.Form["datetimepicker"]));
@@ -68,7 +87,29 @@ namespace SportBook.Controllers
                 return RedirectToAction("Error");
             }
 
-            //TODO: update event
+            // TODO: createEvent();
+
+            return RedirectToAction("EventList", "Event");
+        }
+
+        public ActionResult submitChanges(string id)
+        {
+            //TODO: validate
+
+            string name = String.Format("{0}", Request.Form["name"]);
+            var game = String.Format("{0}", Request.Form["selectedGame"]);
+            try
+            {
+                var date = Convert.ToDateTime(String.Format(Request.Form["datetimepicker"]));
+
+            }
+            catch
+            {
+                //display error
+                return RedirectToAction("Error");
+            }
+
+            //TODO: updateEvent()
 
 
             return RedirectToAction("EventWindow", "Event", new { id });

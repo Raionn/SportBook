@@ -39,5 +39,11 @@ namespace SportBook.Controllers
 
             return resultList;
         }
+
+        public IActionResult UserProfileWindow(string id)
+        {
+            ViewData["user"] = id;
+            return View();
+        }
     }
 }
