@@ -30,9 +30,38 @@ namespace SportBook.Controllers
             return View();
         }
 
-        public IActionResult ProfileWindow()
+        public IActionResult ProfileWindow(string id)
         {
+            ViewData["teams"] = getTeamsThatInvited();
+
             return View();
+        }
+
+        public ActionResult acceptInvitation(string id)
+        {
+            //TODO: addUserToMembers()
+
+            return RedirectToAction("ProfileWindow", "Team", new { id });
+        }
+
+        public ActionResult rejectInvitation(string id)
+        {
+            //TODO: removeInvitation()
+            //TODO: sendRejectionMessage()
+
+            return RedirectToAction("ProfileWindow", "Team", new { id });
+        }
+
+        public List<string> getTeamsThatInvited()
+        {
+            //TODO: query database
+
+            return new List<string>
+                {
+                    "kvieciantikomanda1",
+                    "kvieciantikomanda2",
+                    "kvieciantikomanda3",
+                };
         }
 
         public IActionResult TeamManagementWindow(string id)
