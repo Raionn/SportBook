@@ -5,3 +5,8 @@
 
 <h1>EventWindow</h1>
 
+@*<a class="navbar-brand" asp-area="" asp-controller="Event" asp-action="EventForm">Edit event</a>*@
+@{string id = ViewData["id"] as string;}
+<h5>@id</h5>
+<a asp-action="EventForm" asp-route-id="@id">edit</a>
+<a asp-action="cancelEvent" asp-route-id="@id">cancel</a>

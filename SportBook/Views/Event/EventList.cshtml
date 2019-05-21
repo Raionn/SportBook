@@ -12,16 +12,16 @@
 
     @foreach (string name in ViewData["events"] as IList<string>)
     {
-        <li class="list-group-item">
-            @name
+    <li class="list-group-item">
+        @name
 
-            @*<a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>*@
-
-            <a asp-action="Details" asp-route-id="asd">Details</a> |
-            <a asp-action="Edit" asp-route-id="asd">Edit</a> |
-        </li>
+        @*<a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>*@
+        s
+        <a asp-action="EventWindow" asp-route-id="@name">Details</a>
+        @*<a asp-action="EventWindow" asp-route-id="asd">Edit</a>*@
+    </li>
     }
 
 </ul>
