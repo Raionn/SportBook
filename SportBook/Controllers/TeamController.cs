@@ -8,6 +8,12 @@ namespace SportBook.Controllers
 {
     public class TeamController : Controller
     {
+        public IActionResult MyTeamsWindow()
+        {
+            ViewData["teams"] = getTeamsAssociatedWithPlayer();
+            return View();
+        }
+
         public IActionResult TeamList(string filter)
         {
             ViewData["filter"] = filter;
@@ -20,14 +26,7 @@ namespace SportBook.Controllers
             {
                 ViewData["teams"] = getTeamList();
             }
-            
-            return View();
-        }
 
-
-        public IActionResult MyTeamsWindow()
-        {
-            ViewData["teams"] = getTeamsAssociatedWithPlayer();
             return View();
         }
 
@@ -36,8 +35,9 @@ namespace SportBook.Controllers
             return View();
         }
 
-        public IActionResult TeamManagementWindow()
+        public IActionResult TeamManagementWindow(string id)
         {
+            ViewData["team"] = id;
             return View();
         }
 
