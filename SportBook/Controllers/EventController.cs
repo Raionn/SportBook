@@ -74,6 +74,20 @@ namespace SportBook.Controllers
             return RedirectToAction("EventWindow", "Event", new { id });
         }
 
+        public ActionResult SubmitParticipation(string id)
+        {
+            //TODO: updateParticipantList()
+
+            return RedirectToAction("EventWindow", "Event", new { id });
+        }
+
+        public ActionResult CancelParticipation(string id)
+        {
+            //TODO: updateParticipantList()
+
+            return RedirectToAction("EventWindow", "Event", new { id });
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
