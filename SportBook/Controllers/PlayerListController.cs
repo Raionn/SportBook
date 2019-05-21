@@ -8,17 +8,13 @@ namespace SportBook.Controllers
 {
     public class PlayerListController : Controller
     {
-        public IActionResult PlayerListWindow()
+        public IActionResult PlayerListWindow(string filter)
         {
-            if(ViewData["filter"] != null)
-            {
-                IList<string> players = new List<string>
-                {
-                    "alio",
-                    "gerai"
-                };
+            ViewData["filter"] = filter;
 
-                ViewData["players"] = players;
+            if (ViewData["filter"] != null)
+            {
+                getFilteredPlayers(filter);
             }
             else
             {
@@ -29,17 +25,19 @@ namespace SportBook.Controllers
             return View();
         }
 
-        
-
-        public void GetFilteredPlayers()
+        public void getFilteredPlayers(string filter)
         {
-            IList<string> players = new List<string>
-            {
-                "alio",
-                "gerai"
-            };
+            //TODO: query database
 
-            ViewData["players"] = players;
+            List<string> players = new List<string>
+                {
+                    "žaidėjas1",
+                    "žaidėjas2"
+                };
+
+            var resultList = players.FindAll(delegate (string s) { return s.Contains(filter); });
+
+            ViewData["players"] = resultList;
         }
     }
 }

@@ -10,7 +10,20 @@ namespace SportBook.Controllers
     {
         public IActionResult TeamList()
         {
+            ViewData["teams"] = getTeamsAssociatedWithPlayer();
             return View();
+        }
+
+        public List<string> getTeamsAssociatedWithPlayer()
+        {
+            //TODO: query database
+
+            return new List<string>
+                {
+                    "komanda1",
+                    "komanda2",
+                    "komanda3"
+                };
         }
 
         public IActionResult MyTeamsWindow()

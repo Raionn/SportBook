@@ -24,4 +24,11 @@
     </div>
 </nav>
 <h1>TeamList</h1>
+<ul class="list-group">
 
+    @foreach (string name in ViewData["teams"] as IList<string>)
+    {
+        <li class="list-group-item">@name</li>
+    }
+
+</ul>
