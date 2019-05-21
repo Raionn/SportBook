@@ -7,10 +7,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SportBook.Areas.Team.Controllers
 {
+    [Area("Team")]
     public class TeamController : Controller
     {
         // GET: Team
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult MyTeams()
         {
             return View();
         }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SportBook.Areas.Event.Controllers
 {
+    [Area("Event")]
     public class EventController : Controller
     {
         // GET: Event

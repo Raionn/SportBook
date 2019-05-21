@@ -18,8 +18,6 @@
     <Folder Include="Areas\Event\Models\" />
     <Folder Include="Areas\Event\Views\" />
     <Folder Include="Areas\Team\Data\" />
-    <Folder Include="Areas\Team\Models\" />
-    <Folder Include="Areas\Team\Views\" />
     <Folder Include="Areas\User\Data\" />
     <Folder Include="Areas\User\Models\" />
     <Folder Include="Areas\User\Views\" />

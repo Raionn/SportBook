@@ -41,10 +41,22 @@ namespace SportBook
 
             app.UseMvc(routes =>
             {
-            routes.MapRoute(
-                name: "default",
-                //template: "{controller=Home}/{action=Index}/{id?}");
-                template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+                    name: "Event",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+                    name: "Team",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+                    name: "User",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+                    name: "myteams",
+                    template: "{area:exists}/{controller=Team}/{action=MyTeams}/{id?}");
+
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

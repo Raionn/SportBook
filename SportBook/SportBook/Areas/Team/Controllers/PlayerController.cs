@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SportBook.Areas.Team.Controllers
 {
+    [Area("Team")]
     public class PlayerController : Controller
     {
         // GET: Player
