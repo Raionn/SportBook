@@ -12,26 +12,32 @@ namespace SportBook.Controllers
         {
             ViewData["filter"] = filter;
 
-            //TODO: call database
+            if (ViewData["filter"] != null)
+            {
+                getFilteredPlayers(filter);
+            }
+            else
+            {
+                ViewData["players"] = new List<string>();
+            }
+            
+
+            return View();
+        }
+
+        public void getFilteredPlayers(string filter)
+        {
+            //TODO: query database
+
             List<string> players = new List<string>
                 {
                     "alio",
                     "gerai"
                 };
 
-            if (ViewData["filter"] != null)
-            {
-                var resultList = players.FindAll(delegate (string s) { return s.Contains(filter); });
+            var resultList = players.FindAll(delegate (string s) { return s.Contains(filter); });
 
-                ViewData["players"] = resultList;
-            }
-            else
-            {
-                ViewData["players"] = players;
-            }
-            
-
-            return View();
+            ViewData["players"] = resultList;
         }
     }
 }
