@@ -14,7 +14,7 @@ namespace SportBook.Controllers
 
             if (ViewData["filter"] != null)
             {
-                getFilteredPlayers(filter);
+                ViewData["players"] = getFilteredPlayers(filter);
             }
             else
             {
@@ -25,7 +25,7 @@ namespace SportBook.Controllers
             return View();
         }
 
-        public void getFilteredPlayers(string filter)
+        public List<string> getFilteredPlayers(string filter)
         {
             //TODO: query database
 
@@ -37,7 +37,7 @@ namespace SportBook.Controllers
 
             var resultList = players.FindAll(delegate (string s) { return s.Contains(filter); });
 
-            ViewData["players"] = resultList;
+            return resultList;
         }
     }
 }
