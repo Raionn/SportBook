@@ -12,10 +12,7 @@ namespace SportBook.Controllers
         {
             return View();
         }
-        public IActionResult PlayerListWindow()
-        {
-            return View();
-        }
+        
         public IActionResult UserProfileWindow()
         {
             return View();

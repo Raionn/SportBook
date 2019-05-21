@@ -8,9 +8,38 @@ namespace SportBook.Controllers
 {
     public class PlayerListController : Controller
     {
-        public IActionResult Index()
+        public IActionResult PlayerListWindow()
         {
+            if(ViewData["filter"] != null)
+            {
+                IList<string> players = new List<string>
+                {
+                    "alio",
+                    "gerai"
+                };
+
+                ViewData["players"] = players;
+            }
+            else
+            {
+                ViewData["players"] = new List<string>();
+            }
+            
+
             return View();
+        }
+
+        
+
+        public void GetFilteredPlayers()
+        {
+            IList<string> players = new List<string>
+            {
+                "alio",
+                "gerai"
+            };
+
+            ViewData["players"] = players;
         }
     }
 }
