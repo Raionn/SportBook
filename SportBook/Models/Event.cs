@@ -15,8 +15,10 @@ namespace SportBook.Models
         public string State { get; set; }
         public bool IsDeleted { get; set; }
         public bool HasStarted { get; set; }
-        public List<User> ParticipantList { get; set; }
+
         public User Author { get; set; }
+
+        public List<User> ParticipantList { get; set; }        
         public List<Message> Messages { get; set; }
     }
 }

@@ -6,11 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 using SportBook.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace SportBook.Controllers
 {
     public class EventController : Controller
     {
+        private readonly Context _context;
+
+        public EventController(Context context)
+        {
+            _context = context;
+        }
+
         List<string> messages = new List<string>
             {
                 "alio",
@@ -19,20 +27,16 @@ namespace SportBook.Controllers
                 "( ͡° ͜ʖ ͡°)"
             };
 
-        public IActionResult EventList()
+        //Task<IActionResult> Index()
+
+        public async Task<IActionResult> EventList()
         {
             //TODO: getEventList()
-            IList<string> events = new List<string>
-            {
-                "event_1",
-                "event_2",
-                "event_3",
-                "( ͡° ͜ʖ ͡°)"
-            };
+            //IList<Event> events = await _context.Events.ToListAsync();
 
-            ViewData["events"] = events;
+            //ViewData["events"] = events;
 
-            return View();
+            return View(await _context.Events.ToListAsync());
         }
 
         public ActionResult cancelEvent(string id)
@@ -70,15 +74,16 @@ namespace SportBook.Controllers
             return RedirectToAction("EventWindow");
         }
 
-        public ActionResult SubmitData()
+        public async Task<ActionResult> SubmitData()
         {
+            DateTime date = new DateTime();
 
             string name = String.Format("{0}", Request.Form["name"]);
             var game = String.Format("{0}", Request.Form["selectedGame"]);
 
             try
             {
-                var date = Convert.ToDateTime(String.Format(Request.Form["datetimepicker"]));
+                date = Convert.ToDateTime(String.Format(Request.Form["datetimepicker"]));
 
             }
             catch
@@ -86,8 +91,46 @@ namespace SportBook.Controllers
                 //display error
                 return RedirectToAction("Error");
             }
+            //public int EventId { get; set; }
+            //public string EventName { get; set; }
+            //public string Type { get; set; }
+            //public string CreationTime { get; set; }
+            //public string StartTime { get; set; }
+            //public string State { get; set; }
+            //public bool IsDeleted { get; set; }
+            //public bool HasStarted { get; set; }
+
+            //public User Author { get; set; }
+            //public List<User> ParticipantList { get; set; }
+            //public List<Message> Messages { get; set; }
 
             // TODO: createEvent();
+            if (ModelState.IsValid)
+            {
+                var user = new User();
+                user.UserId = 1;
+                user.Game_account = "JonelisLTU";
+                user.Nickname = "Jonce";
+                user.Password = "katinas";
+                user.Username = "Jonas";
+
+                var eventToAdd = new Event();
+                eventToAdd.EventName = name;
+                eventToAdd.Type = game;
+                eventToAdd.StartTime = date.ToString();
+                eventToAdd.CreationTime = DateTime.Now.ToString();
+                eventToAdd.HasStarted = false;
+                eventToAdd.IsDeleted = false;
+                //eventToAdd.Author = user;
+                //eventToAdd.Messages = ;
+                //eventToAdd.ParticipantList = 
+
+                _context.Add(eventToAdd);
+                await _context.SaveChangesAsync();
+                //return RedirectToAction(nameof(Index));
+            }
+
+            //return View(@event);
 
             return RedirectToAction("EventList", "Event");
         }
