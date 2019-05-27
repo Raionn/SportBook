@@ -28,17 +28,20 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Text)
-                </td>
+            if (item.EventId == int.Parse(@id))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>
 
-            </tr>
+                </tr>
+            }
         }
     </tbody>
 </table>
 
-<form asp-action="submitMessage">
+<form asp-action="submitMessage" asp-route-id="@id">
     <input type="text" name="message" />
     <input type="submit" value="Send" class="btn btn-default" />
 </form>

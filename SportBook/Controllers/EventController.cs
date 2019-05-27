@@ -66,12 +66,15 @@ namespace SportBook.Controllers
             return View(await _context.Messages.ToListAsync());
         }
 
-        public ActionResult submitMessage()
+        public ActionResult submitMessage(string id)
         {
             string message = String.Format("{0}", Request.Form["message"]);
-
+            Message tmp = new Message();
+            tmp.EventId = int.Parse(id);
+            tmp.Text = message;
+            _context.Messages.Add(tmp);
             //TODO: save()
-
+            _context.SaveChanges();
 
             return RedirectToAction("EventWindow");
         }
@@ -146,12 +149,12 @@ namespace SportBook.Controllers
         public ActionResult submitChanges(string id)
         {
             //TODO: validate
-
+            DateTime date = new DateTime();
             string name = String.Format("{0}", Request.Form["name"]);
             var game = String.Format("{0}", Request.Form["selectedGame"]);
             try
             {
-                var date = Convert.ToDateTime(String.Format(Request.Form["datetimepicker"]));
+                date = Convert.ToDateTime(String.Format(Request.Form["datetimepicker"]));
 
             }
             catch
@@ -161,9 +164,15 @@ namespace SportBook.Controllers
             }
 
             //TODO: updateEvent()
+            Event tmp = _context.Events.Find(int.Parse(id));
+            tmp.EventName = name;
+            tmp.Type = game;
+            tmp.StartTime = date.ToString();
+            _context.Update(tmp);
+            _context.SaveChanges();
+            return RedirectToAction("EventList");
 
-
-            return RedirectToAction("EventWindow", "Event", new { id });
+            //return RedirectToAction("EventWindow", "Event", new { id });
         }
 
         public ActionResult SubmitParticipation(string id)
