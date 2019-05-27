@@ -38,11 +38,14 @@ namespace SportBook.Controllers
 
             return View(await _context.Events.ToListAsync());
         }
-
-        public ActionResult cancelEvent(string id)
+        [HttpPost, ActionName("CancelEvent")]
+        [ValidateAntiForgeryToken]
+        public IActionResult CancelEvent(string id)
         {
             //TODO: deleteEvent(id)
-            
+            Event tmp = _context.Events.Find(id);
+            _context.Remove(tmp);
+            _context.SaveChanges();
             return RedirectToAction("EventList");
         }
 
@@ -53,7 +56,7 @@ namespace SportBook.Controllers
             return View();
         }
 
-        public IActionResult EventWindow(string id)
+        public async Task<IActionResult> EventWindow(string id)
         {
             ViewData["id"] = id;
 
@@ -61,7 +64,7 @@ namespace SportBook.Controllers
             //TODO: selectAll() messages
             ViewData["messages"] = messages;
 
-            return View();
+            return View(await _context.Messages.ToListAsync());
         }
 
         public ActionResult submitMessage()
@@ -124,9 +127,15 @@ namespace SportBook.Controllers
                 //eventToAdd.Author = user;
                 //eventToAdd.Messages = ;
                 //eventToAdd.ParticipantList = 
-
-                _context.Add(eventToAdd);
-                await _context.SaveChangesAsync();
+                if (date< DateTime.Now)
+                {
+                    return RedirectToAction("Error");
+                }
+                else {
+                    _context.Add(eventToAdd);
+                    await _context.SaveChangesAsync();
+                }
+                
                 //return RedirectToAction(nameof(Index));
             }
 

@@ -25,8 +25,7 @@
             action = "submitChanges";
         }
         }
-    <form asp-action=@action asp-route-id=@ViewData["id"]>
-        EventId,Type,CreationTime,StartTime,State,isDeleted,hasStarted
+    <form asp-action=@action asp-route-id=@ViewData["id"]>       
         <fieldset>
             <legend>Event details:</legend>
             <input type="text" name="name" value=@ViewData["id"]>

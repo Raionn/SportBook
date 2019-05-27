@@ -13,22 +13,13 @@
         <thead>
             <tr>
                 <th>
+                    @Html.DisplayNameFor(model => model.EventName)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Type)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CreationTime)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.StartTime)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.State)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IsDeleted)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HasStarted)
                 </th>
                 <th></th>
             </tr>
@@ -36,29 +27,24 @@
         <tbody>
             @foreach (var item in Model)
             {
+                if (item.IsDeleted==false)
+                {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Type)
+                    @Html.DisplayFor(modelItem => item.EventName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CreationTime)
+                    @Html.DisplayFor(modelItem => item.Type)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.StartTime)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.State)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsDeleted)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HasStarted)
-                </td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.EventId">Details</a>
+                    <a asp-action="EventWindow" asp-route-id="@item.EventId">Details</a>
                 </td>
             </tr>
+                }
+            
             }
         </tbody>
     </table>

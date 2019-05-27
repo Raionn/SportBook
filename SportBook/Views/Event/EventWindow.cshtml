@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<SportBook.Models.Message>
 @{
     ViewData["Title"] = "EventWindow";
 }
@@ -11,16 +11,30 @@
 <a asp-action="SubmitParticipation" asp-route-id="@id">Participate</a>
 <a asp-action="CancelParticipation" asp-route-id="@id">Cancel participation</a>
 <a asp-action="EventForm" asp-route-id="@id">edit</a>
-<a asp-action="cancelEvent" asp-route-id="@id">cancel</a>
-
-<ul class="list-group list-group-flush">
-
-    @foreach (string message in ViewData["messages"] as IList<string>)
-    {
-        <li class="list-group-item">@message</li>
-    }
-
-</ul>
+<a class="navbar-brand" asp-area="" asp-controller="Event" asp-action="CancelEvent"asp-route-id="@id">cancel</a>
+<a class="navbar-brand" asp-area="" asp-controller="Event" asp-action="EventForm">Create an event</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+         
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+              
+            </tr>
+        }
+    </tbody>
+</table>
 
 <form asp-action="submitMessage">
     <input type="text" name="message" />
