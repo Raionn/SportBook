@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "EventForm";
 }
+@{string type = ViewData["type"] as string;}
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,28 +25,31 @@
         {
             action = "submitChanges";
         }
-        }
-    <form asp-action=@action asp-route-id=@ViewData["id"]>       
+    }
+    <form asp-action=@action asp-route-id=@ViewData["id"]>
         <fieldset>
             <legend>Event details:</legend>
-            <input type="text" name="name" value="">
+            <input type="text" name="name" value=@ViewData["eventname"]>
             <p></p>
-            <select class="form-control" id="selectedGame" name="selectedGame" style="max-width:20%;">
+            <select class="form-control" id="selectedGame" name="selectedGame" style="max-width:20%; ">
                 <option value="lol">League of Legends</option>
                 <option value="basketball">Basketball</option>
                 <option value="football">Football</option>
                 <option value="volleyball">Volleyball</option>
             </select>
             <p></p>
-            <input id="datetimepicker" name="datetimepicker" width="276" />
+            <input id="datetimepicker" name="datetimepicker" width="276" value=@ViewData["starttime"] />
             <p></p>
             <input type="submit" value="Submit">
         </fieldset>
     </form>
-    <script>
+    <script type="text/javascript">
         $('#datetimepicker').datetimepicker({
             footer: true, modal: true,
             uiLibrary: 'bootstrap4'
         });
+        var type = String(@type);
+        document.getElementById("selectedGame").value = type;
+
     </script>
 </body>

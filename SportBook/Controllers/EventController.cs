@@ -48,20 +48,25 @@ namespace SportBook.Controllers
             return RedirectToAction("EventList");
         }
 
-        public IActionResult EventForm(string id)
+        public IActionResult EventForm(string id, string eventname, string type, string starttime)
         {
             ViewData["id"] = id;
-
+            ViewData["eventname"] = eventname;
+            ViewData["type"] = type;
+            ViewData["starttime"] = starttime;
             return View();
         }
 
-        public IActionResult EventWindow(string id, string eventname)
+        public IActionResult EventWindow(string id, string eventname, string type, string starttime)
         {
             ViewData["id"] = id;
 
             //TODO: selectAll() messages
             ViewData["messages"] = messages;
             ViewData["eventname"] = eventname;
+            ViewData["type"] = type;
+            ViewData["starttime"] = starttime;
+
             return View(_context.Messages.ToList());
         }
 
