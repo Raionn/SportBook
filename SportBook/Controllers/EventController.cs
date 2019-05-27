@@ -38,13 +38,12 @@ namespace SportBook.Controllers
 
             return View(await _context.Events.ToListAsync());
         }
-        [HttpPost, ActionName("CancelEvent")]
-        [ValidateAntiForgeryToken]
+
         public IActionResult CancelEvent(string id)
         {
-            //TODO: deleteEvent(id)
-            Event tmp = _context.Events.Find(id);
-            _context.Remove(tmp);
+            Event tmp = _context.Events.Find(int.Parse(id));
+            tmp.IsDeleted = true;
+            _context.Update(tmp);
             _context.SaveChanges();
             return RedirectToAction("EventList");
         }

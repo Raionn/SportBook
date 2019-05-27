@@ -32,23 +32,14 @@ namespace SportBook.Controllers
 
             return View();
         }
-        public async Task<IActionResult> getAllPlayers()
+        public IActionResult getAllPlayers()
         {
-            return View(await _context.Users.ToListAsync());
+            return View(_context.Users.ToList());
         }
-        public List<string> getFilteredPlayers(string filter)
+        public IActionResult getFilteredPlayers(string filter)
         {
             //TODO: query database
-
-            List<string> players = new List<string>
-                {
-                    "žaidėjas1",
-                    "žaidėjas2"
-                };
-
-            var resultList = players.FindAll(delegate (string s) { return s.Contains(filter); });
-
-            return resultList;
+            return View(_context.Users.Where(s => s.Username.Contains(filter)));
         }
 
         public IActionResult UserProfileWindow(string id)
