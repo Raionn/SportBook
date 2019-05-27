@@ -29,14 +29,14 @@ namespace SportBook.Controllers
 
         //Task<IActionResult> Index()
 
-        public async Task<IActionResult> EventList()
+        public IActionResult EventList()
         {
             //TODO: getEventList()
             //IList<Event> events = await _context.Events.ToListAsync();
 
             //ViewData["events"] = events;
 
-            return View(await _context.Events.ToListAsync());
+            return View(_context.Events.ToList());
         }
 
         public IActionResult CancelEvent(string id)
@@ -55,15 +55,14 @@ namespace SportBook.Controllers
             return View();
         }
 
-        public async Task<IActionResult> EventWindow(string id)
+        public IActionResult EventWindow(string id, string eventname)
         {
             ViewData["id"] = id;
 
-
             //TODO: selectAll() messages
             ViewData["messages"] = messages;
-
-            return View(await _context.Messages.ToListAsync());
+            ViewData["eventname"] = eventname;
+            return View(_context.Messages.ToList());
         }
 
         public ActionResult submitMessage(string id)
@@ -75,11 +74,13 @@ namespace SportBook.Controllers
             _context.Messages.Add(tmp);
             //TODO: save()
             _context.SaveChanges();
-
-            return RedirectToAction("EventWindow");
+            ViewData["id"] = id;
+           
+            
+            return RedirectToAction("EventWindow", "Event" , ViewData);
         }
 
-        public async Task<ActionResult> SubmitData()
+        public ActionResult SubmitData()
         {
             DateTime date = new DateTime();
 
@@ -96,20 +97,7 @@ namespace SportBook.Controllers
                 //display error
                 return RedirectToAction("Error");
             }
-            //public int EventId { get; set; }
-            //public string EventName { get; set; }
-            //public string Type { get; set; }
-            //public string CreationTime { get; set; }
-            //public string StartTime { get; set; }
-            //public string State { get; set; }
-            //public bool IsDeleted { get; set; }
-            //public bool HasStarted { get; set; }
 
-            //public User Author { get; set; }
-            //public List<User> ParticipantList { get; set; }
-            //public List<Message> Messages { get; set; }
-
-            // TODO: createEvent();
             if (ModelState.IsValid)
             {
                 var user = new User();
@@ -135,7 +123,7 @@ namespace SportBook.Controllers
                 }
                 else {
                     _context.Add(eventToAdd);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
                 
                 //return RedirectToAction(nameof(Index));

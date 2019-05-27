@@ -10,7 +10,7 @@
 @{string test = ViewData["eventname"] as string;}
 
 <h5>@id</h5>
-<h1>@test</h1>
+<h5>@test</h5>
 <a asp-action="SubmitParticipation" asp-route-id="@id">Participate</a>
 <a asp-action="CancelParticipation" asp-route-id="@id">Cancel participation</a>
 <a asp-action="EventForm" asp-route-id="@id">edit</a>
