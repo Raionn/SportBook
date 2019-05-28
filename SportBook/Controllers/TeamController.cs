@@ -80,17 +80,9 @@ namespace SportBook.Controllers
             return View();
         }
 
-        public List<string> getPlayerList()
+        public IActionResult getPlayerList()
         {
-            return new List<string>
-                {
-                    "žaidėjas1",
-                    "žaidėjas2",
-                    "žaidėjas3",
-                    "žaidėjas4",
-                    "žaidėjas5",
-                    "žaidėjas6",
-                };
+            return View(_context.Users.ToList());
         }
 
         public ActionResult sendInvitationToSelectedPlayer(string id)

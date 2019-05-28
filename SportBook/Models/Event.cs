@@ -19,5 +19,6 @@ namespace SportBook.Models
         public int UserId { get; set; }
         public List<ParticipantList> ParticipantList { get; set; }
         public List<Message> Messages { get; set; }
+        public List<Invitation> Invitations { get; set; }
     }
 }

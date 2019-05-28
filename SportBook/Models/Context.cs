@@ -18,7 +18,7 @@ namespace SportBook.Models
         public DbSet<Message> Messages { get; set; }
         public DbSet<ParticipantList> ParticipantLists { get; set; }
         public DbSet<TeamMembers> TeamMembers { get; set; }
-
+        public DbSet<Invitation> Invitations { get; set; }
     }
     //static List<User> getPlayerList()
     //{

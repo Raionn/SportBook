@@ -15,5 +15,6 @@ namespace SportBook.Models
 
         public List<ParticipantList> ParticipantList { get; set; }
         public List<TeamMembers> TeamMembers { get; set; }
+        public List<Invitation> Invitations { get; set; }
     }
 }

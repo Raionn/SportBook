@@ -79,6 +79,33 @@ namespace SportBook.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Invitations",
+                columns: table => new
+                {
+                    InvitationId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<int>(nullable: false),
+                    TeamId = table.Column<int>(nullable: false),
+                    EventId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Invitations", x => x.InvitationId);
+                    table.ForeignKey(
+                        name: "FK_Invitations_Events_EventId",
+                        column: x => x.EventId,
+                        principalTable: "Events",
+                        principalColumn: "EventId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Invitations_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ParticipantLists",
                 columns: table => new
                 {
@@ -131,6 +158,16 @@ namespace SportBook.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Invitations_EventId",
+                table: "Invitations",
+                column: "EventId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Invitations_UserId",
+                table: "Invitations",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Messages_EventId",
                 table: "Messages",
                 column: "EventId");
@@ -158,6 +195,9 @@ namespace SportBook.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Invitations");
+
             migrationBuilder.DropTable(
                 name: "Messages");
 

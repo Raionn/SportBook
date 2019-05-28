@@ -8,6 +8,8 @@ namespace SportBook.Models
     public class Invitation
     {
         public int InvitationId { get; set; }
-        public int SenderTeamID { get; set; }
+
+        public int UserId { get; set; }
+        public int TeamId { get; set; }
     }
 }

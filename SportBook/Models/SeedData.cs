@@ -103,6 +103,19 @@ namespace SportBook.Models
                         UserId = 1
                     }
                 );
+                context.Invitations.AddRange(
+                    new Invitation
+                    {
+                        TeamId = 4,
+                        UserId = 1
+                    },
+
+                    new Invitation
+                    {
+                        TeamId = 5,
+                        UserId = 1
+                    }
+                );
                 context.SaveChanges();
             }
         }
