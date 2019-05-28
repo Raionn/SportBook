@@ -107,13 +107,15 @@ namespace SportBook.Models
                     new Invitation
                     {
                         TeamId = 4,
-                        UserId = 1
+                        UserId = 1,
+                        Text = "Rudupio vilkai"
                     },
 
                     new Invitation
                     {
                         TeamId = 5,
-                        UserId = 1
+                        UserId = 1,
+                        Text = "Instant karma"
                     }
                 );
                 context.SaveChanges();

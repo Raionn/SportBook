@@ -60,16 +60,9 @@ namespace SportBook.Controllers
             return RedirectToAction("ProfileWindow", "Team", new { id });
         }
 
-        public List<string> getTeamsThatInvited()
+        public IActionResult getTeamsThatInvited(int userid = 1)
         {
-            //TODO: query database
-
-            return new List<string>
-                {
-                    "kvieciantikomanda1",
-                    "kvieciantikomanda2",
-                    "kvieciantikomanda3",
-                };
+            return View(_context.Invitations.Where(s => s.UserId == userid));
         }
 
         public IActionResult TeamManagementWindow(int teamid, string name)
@@ -90,6 +83,7 @@ namespace SportBook.Controllers
             Invitation temp = new Invitation();
             temp.TeamId = teamid;
             temp.UserId = userid;
+            temp.Text = name;
             List<Invitation> allData = _context.Invitations.ToList();
             int index = allData.FindIndex(item => item.UserId == temp.UserId && item.TeamId == temp.TeamId);
             if (index < 0)

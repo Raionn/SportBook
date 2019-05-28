@@ -56,6 +56,8 @@ namespace SportBook.Migrations
 
                     b.Property<int>("TeamId");
 
+                    b.Property<string>("Text");
+
                     b.Property<int>("UserId");
 
                     b.HasKey("InvitationId");

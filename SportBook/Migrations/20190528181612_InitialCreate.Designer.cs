@@ -10,7 +10,7 @@ using SportBook.Models;
 namespace SportBook.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190528164123_InitialCreate")]
+    [Migration("20190528181612_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,6 +57,8 @@ namespace SportBook.Migrations
                     b.Property<int?>("EventId");
 
                     b.Property<int>("TeamId");
+
+                    b.Property<string>("Text");
 
                     b.Property<int>("UserId");
 

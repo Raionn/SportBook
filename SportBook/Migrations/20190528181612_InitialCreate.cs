@@ -84,6 +84,7 @@ namespace SportBook.Migrations
                 {
                     InvitationId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Text = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: false),
                     TeamId = table.Column<int>(nullable: false),
                     EventId = table.Column<int>(nullable: true)
