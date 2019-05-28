@@ -72,9 +72,9 @@ namespace SportBook.Controllers
                 };
         }
 
-        public IActionResult TeamManagementWindow(string id, string name)
+        public IActionResult TeamManagementWindow(int teamid, string name)
         {
-            ViewData["id"] = id;
+            ViewData["teamid"] = teamid;
             ViewData["name"] = name;
             ViewData["players"] = getPlayerList();
             return View();
@@ -85,11 +85,20 @@ namespace SportBook.Controllers
             return View(_context.Users.ToList());
         }
 
-        public ActionResult sendInvitationToSelectedPlayer(string id)
+        public ActionResult sendInvitationToSelectedPlayer(int teamid, int userid, string name)
         {
-            //TODO: saveInvitation()
+            Invitation temp = new Invitation();
+            temp.TeamId = teamid;
+            temp.UserId = userid;
+            List<Invitation> allData = _context.Invitations.ToList();
+            int index = allData.FindIndex(item => item.UserId == temp.UserId && item.TeamId == temp.TeamId);
+            if (index < 0)
+            {
+                _context.Add(temp);
+                _context.SaveChanges();
+            }
 
-            return RedirectToAction("TeamManagementWindow" , "Team", new { id });
+            return RedirectToAction("TeamManagementWindow" , "Team", new { teamid, name });
         }
 
 

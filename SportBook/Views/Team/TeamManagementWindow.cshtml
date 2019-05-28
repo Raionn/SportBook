@@ -8,7 +8,7 @@
 <li class="list-group-item list-group-item-action">
     @ViewData["name"]
 
-    <a asp-action="removePlayerFromTeam" asp-route-id=@ViewData["id"]>Leave</a>
+    <a asp-action="removePlayerFromTeam" asp-route-teamid=@ViewData["teamid"]>Leave</a>
 </li>
 <br />
 
@@ -44,7 +44,7 @@
                     @Html.DisplayFor(modelItem => item.Game_account)
                 </td>
                 <td>
-                    <a asp-action="sendInvitationToSelectedPlayer" asp-route-id=@ViewData["id"]>Invite</a>
+                    <a asp-action="sendInvitationToSelectedPlayer" asp-route-teamid="@ViewData["teamid"]" asp-route-userid="@item.UserId" asp-route-name="@ViewData["name"]">Invite</a>
                 </td>
             </tr>
         }
