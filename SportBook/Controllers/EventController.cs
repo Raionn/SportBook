@@ -158,7 +158,7 @@ namespace SportBook.Controllers
             //return RedirectToAction("EventWindow", "Event", new { id });
         }
 
-        public ActionResult SubmitParticipation(string id)
+        public ActionResult SubmitParticipation(string id, string eventname)
         {
             ParticipantList temp = new ParticipantList();
             temp.EventId = int.Parse(id);
@@ -171,10 +171,10 @@ namespace SportBook.Controllers
                 _context.SaveChanges();
             }
 
-            return RedirectToAction("EventWindow", "Event", new { id });
+            return RedirectToAction("EventWindow", "Event", new { id, eventname });
         }
 
-        public ActionResult CancelParticipation(string id)
+        public ActionResult CancelParticipation(string id, string eventname)
         {
             ParticipantList temp = new ParticipantList();
             temp.EventId = int.Parse(id);
@@ -187,8 +187,9 @@ namespace SportBook.Controllers
                 _context.Remove(toDelete);
                 _context.SaveChanges();
             }
+            ViewData["eventname"] = eventname;
 
-            return RedirectToAction("EventWindow", "Event", new { id });
+            return RedirectToAction("EventWindow", "Event", new { id, eventname });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
