@@ -19,23 +19,8 @@ namespace SportBook.Controllers
             _context = context;
         }
 
-        List<string> messages = new List<string>
-            {
-                "alio",
-                "kaip sekas?",
-                "gerai",
-                "( ͡° ͜ʖ ͡°)"
-            };
-
-        //Task<IActionResult> Index()
-
         public IActionResult EventList()
         {
-            //TODO: getEventList()
-            //IList<Event> events = await _context.Events.ToListAsync();
-
-            //ViewData["events"] = events;
-
             return View(_context.Events.ToList());
         }
 
@@ -62,7 +47,6 @@ namespace SportBook.Controllers
             ViewData["id"] = id;
 
             //TODO: selectAll() messages
-            ViewData["messages"] = messages;
             ViewData["eventname"] = eventname;
             ViewData["type"] = type;
             ViewData["starttime"] = starttime;
@@ -79,8 +63,7 @@ namespace SportBook.Controllers
             _context.Messages.Add(tmp);
             //TODO: save()
             _context.SaveChanges();
-            ViewData["id"] = id;
-           
+            ViewData["id"] = id;           
             
             return RedirectToAction("EventWindow", "Event" , ViewData);
         }
@@ -161,8 +144,15 @@ namespace SportBook.Controllers
             tmp.EventName = name;
             tmp.Type = game;
             tmp.StartTime = date.ToString();
-            _context.Update(tmp);
-            _context.SaveChanges();
+            if (date < DateTime.Now)
+            {
+                return RedirectToAction("Error");
+            }
+            else
+            {
+                _context.Update(tmp);
+                _context.SaveChanges();
+            }
             return RedirectToAction("EventList");
 
             //return RedirectToAction("EventWindow", "Event", new { id });
@@ -170,14 +160,33 @@ namespace SportBook.Controllers
 
         public ActionResult SubmitParticipation(string id)
         {
-            //TODO: updateParticipantList()
+            ParticipantList temp = new ParticipantList();
+            temp.EventId = int.Parse(id);
+            temp.UserId = 1;
+            List<ParticipantList> allData = _context.ParticipantLists.ToList();
+            int index = allData.FindIndex(item => item.UserId == temp.UserId && item.EventId == temp.EventId);
+            if (index < 0)
+            {
+                _context.Add(temp);
+                _context.SaveChanges();
+            }
 
             return RedirectToAction("EventWindow", "Event", new { id });
         }
 
         public ActionResult CancelParticipation(string id)
         {
-            //TODO: updateParticipantList()
+            ParticipantList temp = new ParticipantList();
+            temp.EventId = int.Parse(id);
+            temp.UserId = 1;
+            List<ParticipantList> allData = _context.ParticipantLists.ToList();
+            int index = allData.FindIndex(item => item.UserId == temp.UserId && item.EventId == temp.EventId);            
+            if (index >= 0)
+            {
+                ParticipantList toDelete = allData[index];
+                _context.Remove(toDelete);
+                _context.SaveChanges();
+            }
 
             return RedirectToAction("EventWindow", "Event", new { id });
         }
