@@ -1,0 +1,53 @@
+diff a/SportBook/Views/PlayerList/PlayerListWindow.cshtml b/SportBook/Views/PlayerList/PlayerListWindow.cshtml	(rejected hunks)
+@@ -15,12 +15,44 @@
+         </p>
+     </div>
+ </form>
+-<div class="list-group" id="list-tab" role="tablist">
++<table class="table">
++    <thead>
++        <tr>
++            <th>
++                @Html.DisplayNameFor(model => model.Username)
++            </th>
++            <th>
++                @Html.DisplayNameFor(model => model.Password)
++            </th>
++            <th>
++                @Html.DisplayNameFor(model => model.Nickname)
++            </th>
++            <th>
++                @Html.DisplayNameFor(model => model.Game_account)
++            </th>
+ 
+-    @foreach (string name in ViewData["players"] as IList<string>)
+-    {
+-        @*<li class="list-group-item">@name</li>*@
+-        <a class="list-group-item list-group-item-action" asp-action="UserProfileWindow" asp-route-id="@name">@name</a>
+-    }
++            <th></th>
++        </tr>
++    </thead>
++    <tbody>
++        @foreach (var item in Model)
++        {
++            <tr>
++                <td>
++                    @Html.DisplayFor(modelItem => item.Username)
++                </td>
++                <td>
++                    @Html.DisplayFor(modelItem => item.Password)
++                </td>
++                <td>
++                    @Html.DisplayFor(modelItem => item.Nickname)
++                </td>
++                <td>
++                    @Html.DisplayFor(modelItem => item.Game_account)
++                </td>
++
++            </tr>
++        }
++    </tbody>
++</table>
+ 
+-</div>

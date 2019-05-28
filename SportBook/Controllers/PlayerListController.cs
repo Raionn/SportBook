@@ -32,13 +32,13 @@ namespace SportBook.Controllers
 
             return View();
         }
-        public IActionResult getAllPlayers()
+        public List<User> getAllPlayers()
         {
-            return View(_context.Users.ToList());
+            return _context.Users.ToList().ToList();
         }
-        public IActionResult getFilteredPlayers(string filter)
+        public List<User> getFilteredPlayers(string filter)
         {
-            return View(_context.Users.Where(s => s.Username.Contains(filter)));
+            return _context.Users.Where(s => s.Username.Contains(filter)).ToList();
         }
 
         public IActionResult UserProfileWindow(string id)
