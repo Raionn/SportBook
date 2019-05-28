@@ -1,27 +1,51 @@
-﻿
-@{
+﻿@model IEnumerable<SportBook.Models.Event>
+
+    @{
     ViewData["Title"] = "EventList";
-}
-
-<h2>Event list</h2>
-
-@*<button type="button" class="btn btn-dark">Create an event</button>*@
-<a class="navbar-brand" asp-area="" asp-controller="Event" asp-action="EventForm">Create an event</a>
-<p />
-<ul class="list-group">
-
-    @foreach (string name in ViewData["events"] as IList<string>)
-    {
-    <li class="list-group-item">
-        @name
-
-        @*<a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>*@
-     
-        <a asp-action="EventWindow" asp-route-id="@name">Details</a>
-        @*<a asp-action="EventWindow" asp-route-id="asd">Edit</a>*@
-    </li>
     }
+    <h2>Event list</h2>
 
-</ul>
+    @*<button type="button" class="btn btn-dark">Create an event</button>*@
+    <a class="navbar-brand" asp-area="" asp-controller="Event" asp-action="EventForm">Create an event</a>
+    <p />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.EventName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartTime)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                if (item.IsDeleted==false)
+                {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    <a asp-action="EventWindow" asp-route-id="@item.EventId" asp-route-eventname="@item.EventName" asp-route-type="@item.Type" asp-route-starttime="@item.StartTime">Details</a>
+                </td>
+            </tr>
+                }
+            
+            }
+        </tbody>
+    </table>
+

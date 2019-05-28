@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<SportBook.Models.Message>
 @{
     ViewData["Title"] = "EventWindow";
 }
@@ -7,22 +7,42 @@
 
 @*<a class="navbar-brand" asp-area="" asp-controller="Event" asp-action="EventForm">Edit event</a>*@
 @{string id = ViewData["id"] as string;}
-<h5>@id</h5>
-<a asp-action="SubmitParticipation" asp-route-id="@id">Participate</a>
-<a asp-action="CancelParticipation" asp-route-id="@id">Cancel participation</a>
-<a asp-action="EventForm" asp-route-id="@id">edit</a>
-<a asp-action="cancelEvent" asp-route-id="@id">cancel</a>
+@{string name = ViewData["eventname"] as string;}
+@{string type = ViewData["type"] as string;}
+@{string date = ViewData["starttime"] as string;}
 
-<ul class="list-group list-group-flush">
+<h5>@name</h5>
+<a asp-action="SubmitParticipation" asp-route-id="@id" asp-route-eventname="@name" asp-route-type="@type" asp-route-starttime="@date">Participate</a>
+<a asp-action="CancelParticipation" asp-route-id="@id" asp-route-eventname="@name" asp-route-type="@type" asp-route-starttime="@date">Cancel participation</a>
+<a asp-action="EventForm" asp-route-id="@id" asp-route-eventname="@name" asp-route-type="@type" asp-route-starttime="@date">edit</a>
+<a asp-action="CancelEvent" asp-route-id="@id">cancel</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
 
-    @foreach (string message in ViewData["messages"] as IList<string>)
-    {
-        <li class="list-group-item">@message</li>
-    }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.EventId == int.Parse(@id))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>
 
-</ul>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
 
-<form asp-action="submitMessage">
+<form asp-action="submitMessage" asp-route-id="@id" asp-route-eventname="@name" asp-route-type="@type" asp-route-starttime="@date">
     <input type="text" name="message" />
     <input type="submit" value="Send" class="btn btn-default" />
 </form>

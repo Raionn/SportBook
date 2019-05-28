@@ -1,19 +1,33 @@
-﻿
+﻿@model IEnumerable<SportBook.Models.Invitation>
 @{
     ViewData["Title"] = "ProfileWindow";
 }
 
 <h1>ProfileWindow</h1>
 
-<ul class="list-group">
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Invitations
+            </th>
 
-    @foreach (string name in ViewData["teams"] as IList<string>)
-    {
-    <li class="list-group-item">
-        @name
-        <a asp-action="acceptInvitation" asp-route-id=@ViewData["team"]>Accept</a>
-        <a asp-action="rejectInvitation" asp-route-id=@ViewData["team"]>Reject</a>
-    </li>
-    }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+                <td>
+                    <a asp-action="acceptInvitation" asp-route-id="@item.InvitationId">Accept</a>
+                    <a asp-action="rejectInvitation" asp-route-id="@item.InvitationId">Reject</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 
-</ul>

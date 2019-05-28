@@ -5,12 +5,11 @@ using System.Threading.Tasks;
 
 namespace SportBook.Models
 {
-    public class Invitation
+    public class ParticipantList
     {
-        public int InvitationId { get; set; }
-        public string Text { get; set; }
+        public int ParticipantListId { get; set; }
 
         public int UserId { get; set; }
-        public int TeamId { get; set; }
+        public int EventId { get; set; }
     }
 }

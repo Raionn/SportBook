@@ -1,7 +1,9 @@
-﻿
+﻿@model IEnumerable<SportBook.Models.Event>
 @{
     ViewData["Title"] = "EventForm";
 }
+@{string eventType = ViewData["type"] as string;}
+@{string eventName = ViewData["eventname"] as string;}
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,28 +26,39 @@
         {
             action = "submitChanges";
         }
-        }
+    }
     <form asp-action=@action asp-route-id=@ViewData["id"]>
         <fieldset>
             <legend>Event details:</legend>
-                <input type="text" name="name" value=@ViewData["id"]>
-                <p></p>
-                <select class="form-control" id="selectedGame" name="selectedGame" style="max-width:20%;">
+            Event name:
+            <div class="event">
+                <input type="text" name="name" value="@Html.Raw(eventName)">
+            </div>
+            <p></p>
+            Game type:
+            <div class="selectedGame">
+                <select class="form-control" name="selectedGame" style="max-width:20%;">
                     <option value="lol">League of Legends</option>
                     <option value="basketball">Basketball</option>
                     <option value="football">Football</option>
                     <option value="volleyball">Volleyball</option>
                 </select>
-                <p></p>
-                <input id="datetimepicker" name="datetimepicker" width="276"  />
-                <p></p>
-                <input type="submit" value="Submit" >
+            </div>
+
+            <p></p>
+            Start time:
+            <input id="datetimepicker" name="datetimepicker" width="276" value="@ViewData["starttime"]" />
+            <p></p>
+            <input type="submit" value="Submit">
         </fieldset>
     </form>
+    <input style="visibility:hidden;" id="eventType" value="@eventType" />
     <script>
         $('#datetimepicker').datetimepicker({
             footer: true, modal: true,
             uiLibrary: 'bootstrap4'
         });
+        var type =  $('#eventType').val();
+        $("div.selectedGame select").val(type);
     </script>
 </body>

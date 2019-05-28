@@ -1,25 +1,75 @@
-﻿
+﻿@model IEnumerable<SportBook.Models.User>
 @{
     ViewData["Title"] = "TeamManagementWindow";
 }
-
+@{string creator = ViewData["creator"] as string;}
 <h1>TeamManagementWindow</h1>
 
 <li class="list-group-item list-group-item-action">
-    @ViewData["team"]
-    
-    <a asp-action="removePlayerFromTeam" asp-route-id=@ViewData["team"]>Leave</a>
+    @ViewData["name"]
+    @{
+        if (!creator.Contains("true"))
+        {
+            <a asp-action="removePlayerFromTeam" asp-route-teamid=@ViewData["teamid"]>Leave</a>
+
+        }
+        else
+        {
+            <h6>Team managment</h6>
+        }
+
+    }
+
 </li>
 <br />
-
-<h5>All players</h5>
-<ul class="list-group">
-
-    @foreach (string name in ViewData["players"] as IList<string>)
+@{
+    if (creator.Contains("true"))
     {
-        <li class="list-group-item">
-            @name
-            <a asp-action="sendInvitationToSelectedPlayer" asp-route-id=@ViewData["team"]>Invite</a>
-        </li>
+        <h5>All players</h5>
+
     }
-</ul>
+}
+
+
+<table class="table">
+    @{
+        if (creator.Contains("true"))
+        {
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Username)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nickname)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Game_account)
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (User user in ViewData["players"] as IList<User>)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => user.Username)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => user.Nickname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => user.Game_account)
+                        </td>
+                        <td>
+                            <a asp-action="sendInvitationToSelectedPlayer" asp-route-teamid="@ViewData["teamid"]" asp-route-userid="@user.UserId" asp-route-name="@ViewData["name"]">Invite</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        }
+    }
+
+</table>

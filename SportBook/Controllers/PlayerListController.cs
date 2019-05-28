@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SportBook.Models;
 
 namespace SportBook.Controllers
 {
-    public class PlayerListController : Controller
+    public class PlayerListController : Controller, IPlayerList
     {
+        private readonly Context _context;
+
+        public PlayerListController(Context context)
+        {
+            _context = context;
+        }
         public IActionResult PlayerListWindow(string filter)
         {
             ViewData["filter"] = filter;
@@ -18,26 +26,19 @@ namespace SportBook.Controllers
             }
             else
             {
-                ViewData["players"] = new List<string>();
+                ViewData["players"] = getAllPlayers();
             }
             
 
             return View();
         }
-
-        public List<string> getFilteredPlayers(string filter)
+        public List<User> getAllPlayers()
         {
-            //TODO: query database
-
-            List<string> players = new List<string>
-                {
-                    "žaidėjas1",
-                    "žaidėjas2"
-                };
-
-            var resultList = players.FindAll(delegate (string s) { return s.Contains(filter); });
-
-            return resultList;
+            return _context.Users.ToList();
+        }
+        public List<User> getFilteredPlayers(string filter)
+        {
+            return _context.Users.Where(s => s.Username.Contains(filter)).ToList();
         }
 
         public IActionResult UserProfileWindow(string id)

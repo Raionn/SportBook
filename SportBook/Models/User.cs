@@ -12,5 +12,9 @@ namespace SportBook.Models
         public string Password { get; set; }
         public string Nickname { get; set; }
         public string Game_account { get; set; }
+
+        public List<ParticipantList> ParticipantList { get; set; }
+        public List<TeamMembers> TeamMembers { get; set; }
+        public List<Invitation> Invitations { get; set; }
     }
 }
