@@ -46,7 +46,6 @@ namespace SportBook.Controllers
         {
             ViewData["id"] = id;
 
-            //TODO: selectAll() messages
             ViewData["eventname"] = eventname;
             ViewData["type"] = type;
             ViewData["starttime"] = starttime;
@@ -54,21 +53,20 @@ namespace SportBook.Controllers
             return View(_context.Messages.ToList());
         }
 
-        public ActionResult submitMessage(string id)
+        public ActionResult submitMessage(string id, string eventname, string type, string starttime)
         {
             string message = String.Format("{0}", Request.Form["message"]);
             Message tmp = new Message();
             tmp.EventId = int.Parse(id);
             tmp.Text = message;
             _context.Messages.Add(tmp);
-            //TODO: save()
-            _context.SaveChanges();
-            ViewData["id"] = id;           
+
+            _context.SaveChanges();     
             
-            return RedirectToAction("EventWindow", "Event" , ViewData);
+            return RedirectToAction("EventWindow", "Event" , new { id, eventname, type, starttime });
         }
 
-        public ActionResult SubmitData()
+        public ActionResult SubmitData(int userid = 1)
         {
             DateTime date = new DateTime();
 
@@ -102,9 +100,8 @@ namespace SportBook.Controllers
                 eventToAdd.CreationTime = DateTime.Now.ToString();
                 eventToAdd.HasStarted = false;
                 eventToAdd.IsDeleted = false;
-                //eventToAdd.Author = user;
-                //eventToAdd.Messages = ;
-                //eventToAdd.ParticipantList = 
+                eventToAdd.UserId = userid;
+
                 if (date< DateTime.Now)
                 {
                     return RedirectToAction("Error");
@@ -114,17 +111,13 @@ namespace SportBook.Controllers
                     _context.SaveChanges();
                 }
                 
-                //return RedirectToAction(nameof(Index));
             }
-
-            //return View(@event);
 
             return RedirectToAction("EventList", "Event");
         }
 
         public ActionResult submitChanges(string id)
         {
-            //TODO: validate
             DateTime date = new DateTime();
             string name = String.Format("{0}", Request.Form["name"]);
             var game = String.Format("{0}", Request.Form["selectedGame"]);
@@ -139,7 +132,6 @@ namespace SportBook.Controllers
                 return RedirectToAction("Error");
             }
 
-            //TODO: updateEvent()
             Event tmp = _context.Events.Find(int.Parse(id));
             tmp.EventName = name;
             tmp.Type = game;
@@ -154,11 +146,9 @@ namespace SportBook.Controllers
                 _context.SaveChanges();
             }
             return RedirectToAction("EventList");
-
-            //return RedirectToAction("EventWindow", "Event", new { id });
         }
 
-        public ActionResult SubmitParticipation(string id, string eventname)
+        public ActionResult SubmitParticipation(string id, string eventname, string type, string starttime)
         {
             ParticipantList temp = new ParticipantList();
             temp.EventId = int.Parse(id);
@@ -171,10 +161,10 @@ namespace SportBook.Controllers
                 _context.SaveChanges();
             }
 
-            return RedirectToAction("EventWindow", "Event", new { id, eventname });
+            return RedirectToAction("EventWindow", "Event", new { id, eventname, type, starttime });
         }
 
-        public ActionResult CancelParticipation(string id, string eventname)
+        public ActionResult CancelParticipation(string id, string eventname, string type, string starttime)
         {
             ParticipantList temp = new ParticipantList();
             temp.EventId = int.Parse(id);
@@ -189,7 +179,7 @@ namespace SportBook.Controllers
             }
             ViewData["eventname"] = eventname;
 
-            return RedirectToAction("EventWindow", "Event", new { id, eventname });
+            return RedirectToAction("EventWindow", "Event", new { id, eventname, type, starttime });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

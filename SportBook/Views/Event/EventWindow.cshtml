@@ -12,8 +12,8 @@
 @{string date = ViewData["starttime"] as string;}
 
 <h5>@name</h5>
-<a asp-action="SubmitParticipation" asp-route-id="@id" asp-route-eventname="@name">Participate</a>
-<a asp-action="CancelParticipation" asp-route-id="@id" asp-route-eventname="@name">Cancel participation</a>
+<a asp-action="SubmitParticipation" asp-route-id="@id" asp-route-eventname="@name" asp-route-type="@type" asp-route-starttime="@date">Participate</a>
+<a asp-action="CancelParticipation" asp-route-id="@id" asp-route-eventname="@name" asp-route-type="@type" asp-route-starttime="@date">Cancel participation</a>
 <a asp-action="EventForm" asp-route-id="@id" asp-route-eventname="@name" asp-route-type="@type" asp-route-starttime="@date">edit</a>
 <a asp-action="CancelEvent" asp-route-id="@id">cancel</a>
 <table class="table">
@@ -42,7 +42,7 @@
     </tbody>
 </table>
 
-<form asp-action="submitMessage" asp-route-id="@id">
+<form asp-action="submitMessage" asp-route-id="@id" asp-route-eventname="@name" asp-route-type="@type" asp-route-starttime="@date">
     <input type="text" name="message" />
     <input type="submit" value="Send" class="btn btn-default" />
 </form>
