@@ -38,7 +38,7 @@ namespace SportBook.Controllers
             return View();
         }
 
-        public IActionResult ProfileWindow(string id)
+        public IActionResult ProfileWindow(string teamid)
         {
             ViewData["teams"] = getTeamsThatInvited();
 
@@ -47,15 +47,23 @@ namespace SportBook.Controllers
 
         public ActionResult acceptInvitation(string id)
         {
-            //TODO: addUserToMembers()
+            Invitation temp = _context.Invitations.Find(int.Parse(id));
+            TeamMembers toAdd = new TeamMembers();
+            toAdd.TeamId = temp.TeamId;
+            toAdd.UserId = temp.UserId;
+
+            _context.Add(toAdd);
+            _context.Remove(temp);
+            _context.SaveChanges();            
 
             return RedirectToAction("ProfileWindow", "Team", new { id });
         }
 
         public ActionResult rejectInvitation(string id)
         {
-            //TODO: removeInvitation()
-            //TODO: sendRejectionMessage()
+            Invitation temp = _context.Invitations.Find(int.Parse(id));
+            _context.Remove(temp);
+            _context.SaveChanges();
 
             return RedirectToAction("ProfileWindow", "Team", new { id });
         }
@@ -96,10 +104,10 @@ namespace SportBook.Controllers
         }
 
 
-        public ActionResult removePlayerFromTeam(string id, int uId = 1)
+        public ActionResult removePlayerFromTeam(string teamid, int uId = 1)
         {
             TeamMembers temp = new TeamMembers();
-            temp.TeamId = int.Parse(id);
+            temp.TeamId = int.Parse(teamid);
             temp.UserId = uId;
             List<TeamMembers> allData = _context.TeamMembers.ToList();
             int index = allData.FindIndex(item => item.UserId == temp.UserId && item.TeamId == temp.TeamId);
