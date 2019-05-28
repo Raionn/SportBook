@@ -6,9 +6,9 @@
 <h1>TeamManagementWindow</h1>
 
 <li class="list-group-item list-group-item-action">
-    @ViewData["team"]
+    @ViewData["name"]
     
-    <a asp-action="removePlayerFromTeam" asp-route-id=@ViewData["team"]>Leave</a>
+    <a asp-action="removePlayerFromTeam" asp-route-id=@ViewData["id"]>Leave</a>
 </li>
 <br />
 

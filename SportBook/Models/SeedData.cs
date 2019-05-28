@@ -14,7 +14,7 @@ namespace SportBook.Models
                     DbContextOptions<Context>>()))
             {
 
-                if (context.Users.Any())
+                if (context.Users.Any() && context.Teams.Any() && context.TeamMembers.Any())
                 {
                     return;   // DB has been seeded
                 }
@@ -71,7 +71,7 @@ namespace SportBook.Models
                     {
                         TeamName = "Riteriai",
                         Type = Type.Football,
-                        UserId = 1
+                        UserId = 3
                     },
 
                     new Team
@@ -87,6 +87,19 @@ namespace SportBook.Models
                         Type = Type.LoL,
                         UserId = 2
                     }
+                );
+                context.TeamMembers.AddRange(
+                    new TeamMembers
+                    {
+                        TeamId = 1,
+                        UserId = 1
+                    },
+
+                    new TeamMembers
+                    {
+                        TeamId = 3,
+                        UserId = 1
+                    }                    
                 );
                 context.SaveChanges();
             }

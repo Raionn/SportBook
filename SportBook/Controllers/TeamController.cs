@@ -101,16 +101,33 @@ namespace SportBook.Controllers
         }
 
 
-        public ActionResult removePlayerFromTeam(string id)
+        public ActionResult removePlayerFromTeam(string id, int uId = 1)
         {
-            //TODO: removePlayerFromTeam(id)
+            TeamMembers temp = new TeamMembers();
+            temp.TeamId = int.Parse(id);
+            temp.UserId = uId;
+            List<TeamMembers> allData = _context.TeamMembers.ToList();
+            int index = allData.FindIndex(item => item.UserId == temp.UserId && item.TeamId == temp.TeamId);
+            if (index >= 0)
+            {
+                TeamMembers toDelete = allData[index];
+                _context.Remove(toDelete);
+                _context.SaveChanges();
+            }
 
             return RedirectToAction("MyTeamsWindow");
         }
 
         public IActionResult getTeamsAssociatedWithPlayer(int id = 1)
         {
-            return View(_context.Teams.Where(s => s.UserId == id));
+            IEnumerable<TeamMembers> teamMembers = _context.TeamMembers.Where(s => s.UserId == id);
+            List<int> indexes = new List<int>();
+            foreach(TeamMembers value in teamMembers)
+            {
+                indexes.Add(value.TeamId);
+            }
+            //IEnumerable<Team> teams = _context.Teams.Where(s => s.TeamId == );
+            return View(_context.Teams.Where(s => indexes.Contains(s.TeamId)));
         }
 
         public IActionResult getTeamList()
