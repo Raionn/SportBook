@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SportBook.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace SportBook.Controllers
 {
-    interface IPlayerList
+    public interface IPlayerList
     {
-        //public IActionResult GetAllPlayers();
+        List<User> getAllPlayers();
     }
 }

@@ -8,7 +8,7 @@ using SportBook.Models;
 
 namespace SportBook.Controllers
 {
-    public class PlayerListController : Controller
+    public class PlayerListController : Controller, IPlayerList
     {
         private readonly Context _context;
 
@@ -34,7 +34,7 @@ namespace SportBook.Controllers
         }
         public List<User> getAllPlayers()
         {
-            return _context.Users.ToList().ToList();
+            return _context.Users.ToList();
         }
         public List<User> getFilteredPlayers(string filter)
         {

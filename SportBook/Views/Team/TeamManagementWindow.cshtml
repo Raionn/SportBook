@@ -51,20 +51,20 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @foreach (User user in ViewData["players"] as IList<User>)
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Username)
+                            @Html.DisplayFor(modelItem => user.Username)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Nickname)
+                            @Html.DisplayFor(modelItem => user.Nickname)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Game_account)
+                            @Html.DisplayFor(modelItem => user.Game_account)
                         </td>
                         <td>
-                            <a asp-action="sendInvitationToSelectedPlayer" asp-route-teamid="@ViewData["teamid"]" asp-route-userid="@item.UserId" asp-route-name="@ViewData["name"]">Invite</a>
+                            <a asp-action="sendInvitationToSelectedPlayer" asp-route-teamid="@ViewData["teamid"]" asp-route-userid="@user.UserId" asp-route-name="@ViewData["name"]">Invite</a>
                         </td>
                     </tr>
                 }

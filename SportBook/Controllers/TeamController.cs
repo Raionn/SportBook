@@ -10,10 +10,12 @@ namespace SportBook.Controllers
     public class TeamController : Controller
     {
         private readonly Context _context;
+        private readonly IPlayerList _playerList;
 
-        public TeamController(Context context)
+        public TeamController(Context context, IPlayerList playerList)
         {
             _context = context;
+            _playerList = playerList;
         }
 
         public IActionResult MyTeamsWindow()
@@ -89,9 +91,9 @@ namespace SportBook.Controllers
             return View();
         }
 
-        public IActionResult getPlayerList()
+        public List<User> getPlayerList()
         {
-            return View(_context.Users.ToList());
+            return _playerList.getAllPlayers();
         }
 
         public ActionResult sendInvitationToSelectedPlayer(int teamid, int userid, string name)

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
 using SportBook.Models;
+using SportBook.Controllers;
 
 namespace SportBook
 {
@@ -33,7 +34,7 @@ namespace SportBook
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
+            services.AddScoped<IPlayerList, PlayerListController>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
