@@ -73,11 +73,19 @@ namespace SportBook.Controllers
             return View(_context.Invitations.Where(s => s.UserId == userid));
         }
 
-        public IActionResult TeamManagementWindow(int teamid, string name)
+        public IActionResult TeamManagementWindow(int teamid, string name, int userid = 1)
         {
             ViewData["teamid"] = teamid;
             ViewData["name"] = name;
+            ViewData["userid"] = userid;
+            Team temp = _context.Teams.Find(teamid);
+            string creator = "false";
+            if(temp.UserId == userid)
+            {
+                creator = "true";
+            }
             ViewData["players"] = getPlayerList();
+            ViewData["creator"] = creator;
             return View();
         }
 

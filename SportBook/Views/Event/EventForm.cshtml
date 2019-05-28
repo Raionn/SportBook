@@ -30,10 +30,12 @@
     <form asp-action=@action asp-route-id=@ViewData["id"]>
         <fieldset>
             <legend>Event details:</legend>
+            Event name:
             <div class="event">
                 <input type="text" name="name" value="@Html.Raw(eventName)">
             </div>
             <p></p>
+            Game type:
             <div class="selectedGame">
                 <select class="form-control" name="selectedGame" style="max-width:20%;">
                     <option value="lol">League of Legends</option>
@@ -44,6 +46,7 @@
             </div>
 
             <p></p>
+            Start time:
             <input id="datetimepicker" name="datetimepicker" width="276" value="@ViewData["starttime"]" />
             <p></p>
             <input type="submit" value="Submit">
