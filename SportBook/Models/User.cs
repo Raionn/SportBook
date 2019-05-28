@@ -14,5 +14,6 @@ namespace SportBook.Models
         public string Game_account { get; set; }
 
         public List<ParticipantList> ParticipantList { get; set; }
+        public List<TeamMembers> TeamMembers { get; set; }
     }
 }

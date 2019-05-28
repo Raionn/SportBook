@@ -38,7 +38,6 @@ namespace SportBook.Controllers
         }
         public IActionResult getFilteredPlayers(string filter)
         {
-            //TODO: query database
             return View(_context.Users.Where(s => s.Username.Contains(filter)));
         }
 

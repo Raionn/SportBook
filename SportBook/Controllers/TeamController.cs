@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SportBook.Models;
 
 namespace SportBook.Controllers
 {
     public class TeamController : Controller
     {
+        private readonly Context _context;
+
+        public TeamController(Context context)
+        {
+            _context = context;
+        }
+
         public IActionResult MyTeamsWindow()
         {
             ViewData["teams"] = getTeamsAssociatedWithPlayer();
@@ -64,9 +72,10 @@ namespace SportBook.Controllers
                 };
         }
 
-        public IActionResult TeamManagementWindow(string id)
+        public IActionResult TeamManagementWindow(string id, string name)
         {
-            ViewData["team"] = id;
+            ViewData["id"] = id;
+            ViewData["name"] = name;
             ViewData["players"] = getPlayerList();
             return View();
         }
@@ -99,47 +108,19 @@ namespace SportBook.Controllers
             return RedirectToAction("MyTeamsWindow");
         }
 
-        public List<string> getTeamsAssociatedWithPlayer()
+        public IActionResult getTeamsAssociatedWithPlayer(int id = 1)
         {
-            //TODO: query database
-
-            return new List<string>
-                {
-                    "manokomanda1",
-                    "manokomanda2",
-                    "manokomanda3"
-                };
+            return View(_context.Teams.Where(s => s.UserId == id));
         }
 
-        public List<string> getTeamList()
+        public IActionResult getTeamList()
         {
-            //TODO: query database
-
-            return new List<string>
-                {
-                    "komanda1",
-                    "komanda2",
-                    "komanda3"
-                };
+            return View(_context.Teams.ToList());
         }
 
-        public List<string> getFilteredTeamList(string filter)
+        public IActionResult getFilteredTeamList(string filter)
         {
-            //TODO: query database
-
-            List<string> players = new List<string>
-                {
-                    "filtruotaKomanda1",
-                    "filtruotaKomanda2",
-                    "filtruotaKomanda3",
-                    "filtruotaKomanda4",
-                    "filtruotaKomanda5",
-                    "filtruotaKomanda6",
-                };
-
-            var resultList = players.FindAll(delegate (string s) { return s.Contains(filter); });
-
-            return resultList;
+            return View(_context.Teams.Where(s => s.TeamName.Contains(filter)));
         }
     }
 }

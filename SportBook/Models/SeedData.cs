@@ -13,7 +13,7 @@ namespace SportBook.Models
                 serviceProvider.GetRequiredService<
                     DbContextOptions<Context>>()))
             {
-               
+
                 if (context.Users.Any())
                 {
                     return;   // DB has been seeded
@@ -50,6 +50,42 @@ namespace SportBook.Models
                         Password = "123a",
                         Nickname = "DarzeGimes",
                         Game_account = "DirvojeAuges"
+                    }
+                );
+                context.Teams.AddRange(
+                    new Team
+                    {
+                        TeamName = "Viespaties lelijos",
+                        Type = Type.LoL,
+                        UserId = 1
+                    },
+
+                    new Team
+                    {
+                        TeamName = "Berzo zieve",
+                        Type = Type.Basketball,
+                        UserId = 2
+                    },
+
+                    new Team
+                    {
+                        TeamName = "Riteriai",
+                        Type = Type.Football,
+                        UserId = 1
+                    },
+
+                    new Team
+                    {
+                        TeamName = "Rudupio vilkai",
+                        Type = Type.Volleyball,
+                        UserId = 3
+                    },
+
+                    new Team
+                    {
+                        TeamName = "Instant karma",
+                        Type = Type.LoL,
+                        UserId = 2
                     }
                 );
                 context.SaveChanges();

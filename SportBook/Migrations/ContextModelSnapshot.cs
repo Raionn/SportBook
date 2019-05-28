@@ -91,9 +91,30 @@ namespace SportBook.Migrations
 
                     b.Property<int>("Type");
 
+                    b.Property<int>("UserId");
+
                     b.HasKey("TeamId");
 
                     b.ToTable("Teams");
+                });
+
+            modelBuilder.Entity("SportBook.Models.TeamMembers", b =>
+                {
+                    b.Property<int>("TeamMembersId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("TeamId");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("TeamMembersId");
+
+                    b.HasIndex("TeamId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("TeamMembers");
                 });
 
             modelBuilder.Entity("SportBook.Models.User", b =>
@@ -132,6 +153,19 @@ namespace SportBook.Migrations
 
                     b.HasOne("SportBook.Models.User")
                         .WithMany("ParticipantList")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SportBook.Models.TeamMembers", b =>
+                {
+                    b.HasOne("SportBook.Models.Team")
+                        .WithMany("TeamMembers")
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SportBook.Models.User")
+                        .WithMany("TeamMembers")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
