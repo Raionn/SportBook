@@ -26,10 +26,25 @@ namespace SportBook.Controllers
 
         public IActionResult CancelEvent(string id)
         {
+            
             Event tmp = _context.Events.Find(int.Parse(id));
+            
+
+            if (tmp.HasStarted)
+            {
+                return RedirectToAction("Error");
+            }
+
             tmp.IsDeleted = true;
             _context.Update(tmp);
             _context.SaveChanges();
+
+            tmp = _context.Events.Find(int.Parse(id));
+            if (!tmp.IsDeleted)
+            {
+                return RedirectToAction("Error");
+            }
+
             return RedirectToAction("EventList");
         }
 
