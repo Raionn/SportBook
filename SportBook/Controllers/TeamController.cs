@@ -126,7 +126,6 @@ namespace SportBook.Controllers
             {
                 indexes.Add(value.TeamId);
             }
-            //IEnumerable<Team> teams = _context.Teams.Where(s => s.TeamId == );
             return View(_context.Teams.Where(s => indexes.Contains(s.TeamId)));
         }
 

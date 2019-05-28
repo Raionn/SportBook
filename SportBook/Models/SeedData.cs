@@ -88,6 +88,8 @@ namespace SportBook.Models
                         UserId = 2
                     }
                 );
+                context.SaveChanges();
+
                 context.TeamMembers.AddRange(
                     new TeamMembers
                     {
@@ -99,7 +101,7 @@ namespace SportBook.Models
                     {
                         TeamId = 3,
                         UserId = 1
-                    }                    
+                    }
                 );
                 context.SaveChanges();
             }
